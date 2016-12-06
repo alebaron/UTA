@@ -1,81 +1,40 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://spiderlog.net
 
-# UTA TEST2
+# SpiderLog
 
-Polls is a simple API allowing consumers to view UTA information from TEAM project.
-Test pushing to github
+Provides services for the Pider Log app family, recording the world's spider sightings
 
-## Questions Collection [/questions]
+#Group Spiders
+Access to Spider resources
 
-### List All Questions [GET]
+## My Spiders [/spiders{?page,size}]
+### Get all my spider sigtings [GET]
 
++Parameters
+    + page (required, number, 1 )...  page number
+    + size (required, number, 10 )... page size
+    
++Request
+
+    +Header
+    
+        Authorization: Basic dXNlcjpwYXNzd29yZA==
+        
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
+            "page" : 
+            {  
+                "number" : 1,
+                "size" : 10,
+              "totalPages": 20
+              },
+              "spiders" :
+            [    
+                {  
+                    "sightedat" : "2014-08-29To7:00",
+                    "description" : "Spider I saw at the office"
+                }
             ]
         }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
